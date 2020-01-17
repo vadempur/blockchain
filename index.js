@@ -12,9 +12,27 @@ class Block{
   }
 }
 
-const creategenesisBlock=()=>new Block(0,Date.now(),'Genisis Block',0)
+const createGenesisBlock=()=>new Block(0,Date.now(),'Genisis Block',0)
 
 const nextBlock=(prevBlock,data)=>
  new Block(prevBlock.index+1,Date.now(),data,prevBlock.thisHash)
 
- 
+
+let createBlockChain=num=>{
+  const blockChain=[createGenesisBlock()];
+  let prevBlock=blockChain[0];
+
+  for(let i=1; i<num; i+=1){
+    const blockToAdd=nextBlock(prevBlock ,`This is block #${i}`);
+    blockChain.push(blockToAdd);
+    prevBlock=blockToAdd;
+  }
+console.log(blockChain)
+}
+
+const lengthToCreate=11;
+
+createBlockChain(lengthToCreate)
+
+
+
